@@ -1,8 +1,6 @@
 const Category = require('../models/Category');
 
-// @desc    Get all categories
-// @route   GET /api/categories
-// @access  Public
+
 exports.getCategories = async (req, res) => {
   try {
     const categories = await Category.find({ isActive: true });
@@ -20,9 +18,7 @@ exports.getCategories = async (req, res) => {
   }
 };
 
-// @desc    Get single category
-// @route   GET /api/categories/:id
-// @access  Public
+
 exports.getCategory = async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
@@ -46,9 +42,7 @@ exports.getCategory = async (req, res) => {
   }
 };
 
-// @desc    Create new category
-// @route   POST /api/categories
-// @access  Private
+
 exports.createCategory = async (req, res) => {
   try {
     const category = await Category.create(req.body);
@@ -65,9 +59,7 @@ exports.createCategory = async (req, res) => {
   }
 };
 
-// @desc    Update category
-// @route   PUT /api/categories/:id
-// @access  Private
+
 exports.updateCategory = async (req, res) => {
   try {
     let category = await Category.findById(req.params.id);
@@ -96,9 +88,7 @@ exports.updateCategory = async (req, res) => {
   }
 };
 
-// @desc    Delete category
-// @route   DELETE /api/categories/:id
-// @access  Private
+
 exports.deleteCategory = async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
