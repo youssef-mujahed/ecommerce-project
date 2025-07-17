@@ -1,9 +1,7 @@
 const Product = require('../models/Product');
 const { createNotification } = require('./notifications');
 
-// @desc    Get all products with filtering, search and sorting
-// @route   GET /api/products
-// @access  Public
+
 exports.getProducts = async (req, res) => {
   try {
     const {
@@ -93,9 +91,7 @@ exports.getProducts = async (req, res) => {
   }
 };
 
-// @desc    Get single product
-// @route   GET /api/products/:id
-// @access  Public
+
 exports.getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id).populate('category');
@@ -119,9 +115,7 @@ exports.getProduct = async (req, res) => {
   }
 };
 
-// @desc    Create new product
-// @route   POST /api/products
-// @access  Private
+
 exports.createProduct = async (req, res) => {
   try {
     const product = await Product.create(req.body);
@@ -138,9 +132,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// @desc    Update product
-// @route   PUT /api/products/:id
-// @access  Private
+
 exports.updateProduct = async (req, res) => {
   try {
     let product = await Product.findById(req.params.id);
@@ -182,9 +174,7 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-// @desc    Delete product
-// @route   DELETE /api/products/:id
-// @access  Private
+
 exports.deleteProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
