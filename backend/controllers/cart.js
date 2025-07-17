@@ -1,9 +1,7 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 
-// @desc    Get user cart
-// @route   GET /api/cart
-// @access  Private
+
 exports.getCart = async (req, res) => {
   try {
     let cart = await Cart.findOne({ user: req.user.id, isActive: true })
@@ -29,9 +27,7 @@ exports.getCart = async (req, res) => {
   }
 };
 
-// @desc    Get guest cart
-// @route   GET /api/cart/guest/:sessionId
-// @access  Public
+
 exports.getGuestCart = async (req, res) => {
   try {
     const { sessionId } = req.params;
@@ -59,9 +55,7 @@ exports.getGuestCart = async (req, res) => {
   }
 };
 
-// @desc    Add item to cart
-// @route   POST /api/cart
-// @access  Private
+
 exports.addToCart = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
@@ -121,9 +115,7 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-// @desc    Add item to guest cart
-// @route   POST /api/cart/guest
-// @access  Public
+
 exports.addToGuestCart = async (req, res) => {
   try {
     const { productId, quantity, sessionId } = req.body;
@@ -183,9 +175,7 @@ exports.addToGuestCart = async (req, res) => {
   }
 };
 
-// @desc    Update cart item quantity
-// @route   PUT /api/cart/:itemId
-// @access  Private
+
 exports.updateCartItem = async (req, res) => {
   try {
     const { itemId } = req.params;
@@ -233,9 +223,7 @@ exports.updateCartItem = async (req, res) => {
   }
 };
 
-// @desc    Remove item from cart
-// @route   DELETE /api/cart/:itemId
-// @access  Private
+
 exports.removeFromCart = async (req, res) => {
   try {
     const { itemId } = req.params;
@@ -263,9 +251,7 @@ exports.removeFromCart = async (req, res) => {
   }
 };
 
-// @desc    Clear cart
-// @route   DELETE /api/cart
-// @access  Private
+
 exports.clearCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user.id, isActive: true });
