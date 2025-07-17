@@ -2,9 +2,7 @@ const Notification = require('../models/Notification');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 
-// @desc    Get all notifications (admin)
-// @route   GET /api/notifications
-// @access  Private
+
 exports.getNotifications = async (req, res) => {
   try {
     const notifications = await Notification.find({ isActive: true })
@@ -24,9 +22,7 @@ exports.getNotifications = async (req, res) => {
   }
 };
 
-// @desc    Mark notification as read
-// @route   PUT /api/notifications/:id/read
-// @access  Private
+
 exports.markAsRead = async (req, res) => {
   try {
     const notification = await Notification.findById(req.params.id);
@@ -53,9 +49,7 @@ exports.markAsRead = async (req, res) => {
   }
 };
 
-// @desc    Mark all notifications as read
-// @route   PUT /api/notifications/read-all
-// @access  Private
+
 exports.markAllAsRead = async (req, res) => {
   try {
     await Notification.updateMany(
@@ -75,9 +69,7 @@ exports.markAllAsRead = async (req, res) => {
   }
 };
 
-// @desc    Get unread notifications count
-// @route   GET /api/notifications/unread-count
-// @access  Private
+
 exports.getUnreadCount = async (req, res) => {
   try {
     const count = await Notification.countDocuments({
