@@ -4,9 +4,7 @@ console.log('ENV PATH:', path.resolve(process.cwd(), '.env'));
 require('dotenv').config();
 console.log('Loaded JWT_SECRET:', process.env.JWT_SECRET);
 
-// @desc    Get all brands
-// @route   GET /api/brands
-// @access  Public
+
 exports.getBrands = async (req, res) => {
   try {
     const brands = await Brand.find({ isActive: true });
@@ -24,9 +22,7 @@ exports.getBrands = async (req, res) => {
   }
 };
 
-// @desc    Get single brand
-// @route   GET /api/brands/:id
-// @access  Public
+
 exports.getBrand = async (req, res) => {
   try {
     const brand = await Brand.findById(req.params.id);
@@ -50,9 +46,7 @@ exports.getBrand = async (req, res) => {
   }
 };
 
-// @desc    Create new brand
-// @route   POST /api/brands
-// @access  Private
+
 exports.createBrand = async (req, res) => {
   try {
     const brand = await Brand.create(req.body);
@@ -69,9 +63,7 @@ exports.createBrand = async (req, res) => {
   }
 };
 
-// @desc    Update brand
-// @route   PUT /api/brands/:id
-// @access  Private
+
 exports.updateBrand = async (req, res) => {
   try {
     let brand = await Brand.findById(req.params.id);
@@ -100,9 +92,7 @@ exports.updateBrand = async (req, res) => {
   }
 };
 
-// @desc    Delete brand
-// @route   DELETE /api/brands/:id
-// @access  Private
+
 exports.deleteBrand = async (req, res) => {
   try {
     const brand = await Brand.findById(req.params.id);
