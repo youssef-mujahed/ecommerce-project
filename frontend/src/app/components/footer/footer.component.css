@@ -1,0 +1,20 @@
+.social-links a {
+  font-size: 1.2rem;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+  opacity: 0.7;
+}
+
+.list-unstyled li {
+  margin-bottom: 0.5rem;
+}
+
+.list-unstyled a {
+  transition: color 0.2s ease-in-out;
+}
+
+.list-unstyled a:hover {
+  color: #fff !important;
+} 

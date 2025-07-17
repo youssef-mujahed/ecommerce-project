@@ -1,0 +1,123 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Filters</h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Search</label>
+            <div class="input-group">
+              <input type="text" 
+                     class="form-control" 
+                     [(ngModel)]="searchTerm"
+                     placeholder="Search products..."
+                     (keyup.enter)="onSearch()">
+              <button class="btn btn-outline-secondary" 
+                      type="button"
+                      (click)="onSearch()">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+              <option value="">All Categories</option>
+              <option value="laptops">Laptops</option>
+              <option value="smartphones">Smartphones</option>
+              <option value="accessories">Accessories</option>
+              <option value="gaming">Gaming</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Brand</label>
+            <select class="form-select" [(ngModel)]="selectedBrand" (change)="onBrandChange()">
+              <option value="">All Brands</option>
+              <option value="apple">Apple</option>
+              <option value="samsung">Samsung</option>
+              <option value="dell">Dell</option>
+              <option value="hp">HP</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select" [(ngModel)]="selectedGender" (change)="onGenderChange()">
+              <option value="">All</option>
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+              <option value="unisex">Unisex</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Sort By</label>
+            <select class="form-select" [(ngModel)]="sortBy" (change)="onSortChange()">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+              <option value="createdAt">Date Added</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Sort Direction</label>
+            <select class="form-select" [(ngModel)]="sortDirection" (change)="onSortChange()">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+
+          <button class="btn btn-outline-secondary w-100" (click)="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Products</h2>
+        <span class="text-muted">{{ products.length }} products found</span>
+      </div>
+
+      <app-loading-spinner *ngIf="loading" message="Loading products..."></app-loading-spinner>
+
+      <div class="row" *ngIf="!loading">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products">
+          <app-product-card 
+            [product]="product"
+            (addToCart)="addToCart($event)">
+          </app-product-card>
+        </div>
+      </div>
+
+      <!-- Pagination Controls -->
+      <nav *ngIf="!loading && totalPages > 1" aria-label="Product pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="page === 1">
+            <button class="page-link" (click)="prevPage()" [disabled]="page === 1">Previous</button>
+          </li>
+          <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === (i+1)">
+            <button class="page-link" (click)="goToPage(i+1)">{{ i+1 }}</button>
+          </li>
+          <li class="page-item" [class.disabled]="page === totalPages">
+            <button class="page-link" (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+          </li>
+        </ul>
+      </nav>
+
+      <div *ngIf="!loading && products.length === 0" class="text-center py-5">
+        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+        <h4 class="text-muted">No products found</h4>
+        <p class="text-muted">Try adjusting your filters or search terms.</p>
+        <button class="btn btn-primary" (click)="clearFilters()">
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

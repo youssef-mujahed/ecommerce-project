@@ -1,0 +1,59 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h2 class="mb-4">User Profile</h2>
+      <app-loading-spinner *ngIf="loading" message="Loading profile..."></app-loading-spinner>
+      <div *ngIf="!loading">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" formControlName="firstName">
+            <div class="text-danger small" *ngIf="profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched">
+              First name is required and must be at least 2 characters
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName">
+            <div class="text-danger small" *ngIf="profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched">
+              Last name is required and must be at least 2 characters
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email">
+            <div class="text-danger small" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+              Please enter a valid email address
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" formControlName="phone">
+            <div class="text-danger small" *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched">
+              Please enter your phone number
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select" formControlName="gender">
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="text-danger small" *ngIf="profileForm.get('gender')?.invalid && profileForm.get('gender')?.touched">
+              Please select your gender
+            </div>
+          </div>
+          <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || loading">
+              Save Changes
+            </button>
+          </div>
+        </form>
+        <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,62 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4">Login</h2>
+          
+          <app-alert 
+            type="danger" 
+            [message]="errorMessage" 
+            (close)="errorMessage = ''"
+            *ngIf="errorMessage">
+          </app-alert>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="emailOrPhone" class="form-label">Email or Phone</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="emailOrPhone"
+                formControlName="emailOrPhone"
+                placeholder="Enter your email or phone number">
+              <div class="text-danger small" *ngIf="loginForm.get('emailOrPhone')?.invalid && loginForm.get('emailOrPhone')?.touched">
+                Email or phone is required
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password"
+                formControlName="password"
+                placeholder="Enter your password">
+              <div class="text-danger small" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                Password is required and must be at least 6 characters
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                [disabled]="loginForm.invalid || loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                {{ loading ? 'Logging in...' : 'Login' }}
+              </button>
+            </div>
+          </form>
+
+          <div class="text-center mt-3">
+            <p class="mb-0">Don't have an account? 
+              <a routerLink="/register" class="text-decoration-none">Register here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold text-primary d-flex align-items-center" routerLink="/">
+      <i class="fas fa-laptop me-2"></i> Tech Store
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">
+            Products
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" routerLink="/orders" routerLinkActive="active">
+            My Orders
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active">
+            Admin
+          </a>
+        </li>
+      </ul>
+
+      <!-- Search Bar -->
+      <form class="d-flex me-3" role="search">
+        <input class="form-control rounded-pill px-3" type="search" placeholder="Search products..." aria-label="Search">
+        <button class="btn btn-primary ms-2 rounded-pill" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+
+      <!-- Right Side Items -->
+      <ul class="navbar-nav align-items-center">
+        <!-- Cart -->
+        <li class="nav-item position-relative me-2">
+          <a class="nav-link" routerLink="/cart">
+            <i class="fas fa-shopping-cart fs-5"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  *ngIf="cartItemCount > 0">
+              {{ cartItemCount }}
+            </span>
+          </a>
+        </li>
+
+        <!-- User Dropdown -->
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fas fa-user me-1"></i> {{ currentUser?.firstName }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/orders">My Orders</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#" (click)="logout()">Logout</a></li>
+          </ul>
+        </li>
+
+        <!-- Login/Register -->
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
