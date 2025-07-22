@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://tech-store-api.herokuapp.com/api'
+  apiUrl: 'https://ecommerce-backend-production-6dec.up.railway.app/api'
 }; 
